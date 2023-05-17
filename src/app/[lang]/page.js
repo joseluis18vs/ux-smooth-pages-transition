@@ -5,7 +5,6 @@ export default function Main({ params })
 {
 
     const lang = params.lang
-    console.log(lang);
 
     return(
         <div className={main.container}>
@@ -21,7 +20,6 @@ export default function Main({ params })
                 <Sections />
 
             </div>
-            Main
         </div>
     )
 }

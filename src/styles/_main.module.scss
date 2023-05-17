@@ -10,7 +10,7 @@
 .wrapper {
     position: relative;
     width: 1440px;
-    max-width: 90%;
+    max-width: 100%;
     height: 100%;
     margin: 0 auto;
 }
@@ -28,16 +28,39 @@
     position: absolute;
     width: 100%;
     height: 100%;
-    opacity: 0;
     visibility: hidden;
-    -webkit-transition: opacity .4s ease-in-out, visibility 0s .4s;
-    transition: opacity .4s ease-in-out, visibility 0s .4s;
+    opacity: 0;
+    transition: transform 0.6s ease-out, opacity 0.6s ease-out;
+    -webkit-transition: transform 0.6s ease-out, opacity 0.6s ease-out;
 }
 
 .is_active {
-    opacity: 1;
     visibility: visible;
-    z-index: 1;
-    -webkit-transition: opacity .4s ease-in-out .4s;
-    transition: opacity .4s ease-in-out .4s;
+    opacity: 1;
+    transition: transform 0.6s ease-out, opacity 0.6s ease-out;
+    -webkit-transition: transform 0.6s ease-out, opacity 0.6s ease-out;
+}
+
+.fade_out_down {
+    transform: translateY(-351px);
+    transition: transform 0.6s ease-out;
+    -webkit-transition: transform 0.6s ease-out;
+}
+
+.fade_out_up {
+    transform: translateY(351px);
+    transition: transform 0.6s ease-out;
+    -webkit-transition: transform 0.6s ease-out;
+}
+
+.fade_in_down {
+    transform: translateY(-351px);
+    transition: transform 0.6s ease-out;
+    -webkit-transition: transform 0.6s ease-out;
+}
+
+.fade_in_up {
+    transform: translateY(351px);
+    transition: transform 0.6s ease-out;
+    -webkit-transition: transform 0.6s ease-out;
 }

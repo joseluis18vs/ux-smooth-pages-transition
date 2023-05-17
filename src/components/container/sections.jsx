@@ -2,6 +2,9 @@
 import styl from "@/styles/_main.module.scss"
 import Section from "../pure/sections/section"
 import { useEffect, useState } from "react"
+import SectionOne from "../pure/sections/one"
+import SectionTwo from "../pure/sections/two"
+import SectionThree from "../pure/sections/three"
 
 export default function Sections()
 {
@@ -9,6 +12,7 @@ export default function Sections()
     const [active, setActive] = useState(1)
     const [touchStart, setTouchStart] = useState(0)
     const [touchEnd, setTouchEnd] = useState(0)
+    const [effect, setEffect] = useState("")
 
     // COMPONENT LIFE CYCLE
     useEffect(() => {
@@ -30,107 +34,92 @@ export default function Sections()
 
     // FUNCTIONS
 
-    //------------------- Scroll -------------------//
-    function handleScroll(e){
-        const delta = e.deltaY
+    function handleScroll(e) {
+        const delta = e.deltaY;
+        handleSectionChange(delta);
+    }
 
+    function handleTouchStart(e) {
+        const touch = e.touches[0];
+        setTouchStart(touch.clientY);
+    }
+
+    function handleTouchEnd(e) {
+        const touch = e.changedTouches[0];
+        setTouchEnd(touch.clientY);
+        touchAction();
+    }
+
+    function handleArrowKey(e) {
+        if (e.keyCode === 38) {
+            // up
+            handleSectionChange(-1);
+        }
+        if (e.keyCode === 40) {
+            // down
+            handleSectionChange(1);
+        }
+    }
+
+    function touchAction() {
+        const delta = touchStart - touchEnd;
         if (delta < 0) {
-
-            setTimeout(() => {
-
-                if (active > 1) {
-                    setActive(active - 1)
-                } else {
-                    setActive(3)
-                }
-            }, 400)
+            handleSectionChange(-1);
         }
-
         if (delta > 0) {
-
-            setTimeout(() => {
-
-                if (active < 3) {
-                    setActive(active + 1)
-                } else {
-                    setActive(1)
-                }
-
-            }, 400)
+            handleSectionChange(1);
         }
     }
 
-    //------------------- Touch -------------------//
-
-    function handleTouchStart(e)
-    {
-        const touch = e.touches[0]
-
-        setTouchStart(touch.clientY)
-    }
-    
-    function handleTouchEnd(e) 
-    {    
-        const touch = e.touches[0]
-        
-        setTouchEnd(touch.clientY)
-        
+    // 
+    function handleSectionChange(delta) {
         setTimeout(() => {
-            touchAction()
-        }, 400)
-    }
-
-    function touchAction()
-    {
-        const delta = touchStart - touchEnd
-
-        if (delta < 0) {
-
-            if (active > 1) {
-                setActive(active - 1);
-            } else {
-                setActive(3)
+            if (delta < 0) {
+                if (active > 1) {
+                    setEffect("up");
+                    setTimeout(() => {
+                        setEffect("");
+                        setActive(active - 1);
+                    }, 400);
+                } else {
+                    setActive(3);
+                }
             }
-
-        }
-
-        if (delta > 0) {
-
-            if (active < 3) {
-                setActive(active + 1)
-            } else {
-                setActive(1)
+            if (delta > 0) {
+                if (active < 3) {
+                    setEffect("down");
+                    setTimeout(() => {
+                        setEffect("");
+                        setActive(active + 1);
+                    }, 400);
+                } else {
+                    setActive(1);
+                }
             }
-        }
-    }
-
-    //------------------- Arrow Key -------------------//
-    function handleArrowKey(e)
-    {
-        if (e.keyCode === 38) // up
-        {
-            if (active > 1) {
-                setActive(active - 1);
-            } else {
-                setActive(3)
-            }
-        }
-
-        if (e.keyCode === 40) // down
-        {
-            if (active < 3) {
-                setActive(active + 1)
-            } else {
-                setActive(1)
-            }
-        }
+        }, 400);
     }
 
     return(
         <ul className={styl.main_content}>
-            <Section is_active={active === 1 ? true : false} content={"Content 1"} />
-            <Section is_active={active === 2 ? true : false} content={"Content 2"} />
-            <Section is_active={active === 3 ? true : false} content={"Content 3"} />
+            
+            <Section 
+                is_active={active === 1 ? true : false} 
+                effect={effect} 
+                content={<SectionOne />} 
+            />
+
+            <Section 
+                is_active={active === 2 ? true : false} 
+                effect={effect} 
+                content={<SectionTwo />} 
+            />
+
+            <Section 
+                is_active={active === 3 ? true : false} 
+                effect={effect} 
+                content={<SectionThree />} 
+            />
+
         </ul>
     )
 }
