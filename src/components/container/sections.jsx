@@ -80,9 +80,17 @@ export default function Sections()
                     setTimeout(() => {
                         setEffect("");
                         setActive(active - 1);
-                    }, 400);
+                    }, 300);
                 } else {
-                    setActive(3);
+
+                    setActive(1)
+
+                    /* setEffect("up");
+                    setTimeout(() => {
+                        setEffect("");
+                        setActive(3);
+                    }, 300); */
+
                 }
             }
             if (delta > 0) {
@@ -93,10 +101,14 @@ export default function Sections()
                         setActive(active + 1);
                     }, 400);
                 } else {
-                    setActive(1);
+                    setEffect("down");
+                    setTimeout(() => {
+                        setEffect("");
+                        setActive(1);
+                    }, 400);
                 }
             }
-        }, 400);
+        }, 200);
     }
 
     return(

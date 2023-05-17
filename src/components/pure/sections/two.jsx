@@ -11,7 +11,7 @@ export default function SectionTwo()
     return(
         <>
             <div className={styl.section_two}>
-                <div className={`${inter.className} text-9xl text-gray-100`}>Section 2</div>
+                <div className={`${inter.className} text-9xl text-gray-500`}>Section 2</div>
             </div>
         </>
     )

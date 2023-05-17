@@ -11,7 +11,7 @@ export default function SectionThree()
     return(
         <>
             <div className={styl.section_three}>
-                <div className={`${inter.className} text-9xl text-gray-100`}>Section 3</div>
+                <div className={`${inter.className} text-9xl text-gray-500`}>Section 3</div>
             </div>
         </>
     )
